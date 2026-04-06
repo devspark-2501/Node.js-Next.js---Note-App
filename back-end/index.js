@@ -2,43 +2,37 @@ const express = require('express');
 const cors = require('cors');
 
 const app = express();
-
-app.use(cors());
 app.use(express.json());
 
-// in-memory storage
 let notes = [
-  { text: "Reminder to complete homework..." },
-  { text: "Meeting scheduled tomorrow..." }
+    { text: "Reminder to complete homework..." },
+    { text: "Meeting scheduled tomorrow..." },
 ];
 
-// root route
 app.get('/', (req, res) => {
-  res.send('Note Project Running');
+    res.send('Note Project Running')
 });
 
-// get all notes
 app.get('/notes', (req, res) => {
-  res.json(notes);
+    res.json(notes);
 });
 
-// add note
 app.post('/submit', (req, res) => {
-  const { text } = req.body;
+    const { text } = req.body;
 
-  if (!text || !text.trim()) {
-    return res.status(400).json({ error: "Note cannot be empty" });
-  }
+    if (!text || !text.trim()) {
+        return res.status(400).json({ error: "Note cannot be empty" })
+    }
 
-  const newNote = { text };
-  notes.push(newNote);
+    const newNote = { text };
+    notes.push(newNote);
 
-  console.log("Added:", newNote);
+    console.log('Added:', newNote);
 
-  res.json({ message: "Note added", notes });
+    res.json({ message: "Note Added", notes });
 });
 
-// start server
 app.listen(4000, () => {
-  console.log('Server running on http://localhost:4000');
-});
+    console.log('Server running !!');
+    
+})
